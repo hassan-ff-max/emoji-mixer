@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQIK EMOJI CRAFTER</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            cyan: '#06b6d4',
+                            pink: '#ec4899',
+                            neon: '#a855f7'
+                        },
+                        cyber: {
+                            bg: '#090d16',
+                            card: '#111827',
+                            border: '#1f2937',
+                            accent: '#f43f5e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, filter: 'drop-shadow(0 0 15px rgba(168, 85, 247, 0.6))' },
+                            '50%': { opacity: 0.8, filter: 'drop-shadow(0 0 25px rgba(6, 182, 212, 0.8))' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #060911;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-button:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+
+        /* Glow effects */
+        .neon-glow-purple {
+            box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.5);
+        }
+        .neon-glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.5);
+        }
+        .neon-text-purple {
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-neon selection:text-white">
+
+    <!-- Ambient Animated Background Spheres -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl animate-float" style="animation-delay: 1s;"></div>
+    </div>
+
+    <!-- MAIN WRAPPER -->
+    <div class="relative z-10 flex-grow flex flex-col">
+
+        <!-- HEADER / NAVIGATION -->
+        <header class="sticky top-0 z-40 glass-panel border-b border-gray-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.reload()">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-pink-500 to-cyan-400 p-0.5 shadow-lg shadow-purple-500/30">
+                        <div class="w-full h-full bg-gray-950 rounded-[14px] flex items-center justify-center">
+                            <span class="text-2xl">🔥</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-gray-200 to-purple-400 bg-clip-text text-transparent">
+                            EMOJI<span class="text-brand-neon">CRAFT</span> <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">PRO</span>
+                        </h1>
+                        <p class="text-[10px] text-gray-400 tracking-wider uppercase font-semibold">Ultra Mashup Generator</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-2">
+                    <a href="https://wa.me/923294675242" target="_blank" class="glass-button px-4 py-2 rounded-xl text-sm font-medium text-gray-300 hover:text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-headset text-purple-400"></i>
+                        <span>Support</span>
+                    </a>
+                    <a href="https://wa.me/923294675242" target="_blank" class="glass-button px-4 py-2 rounded-xl text-sm font-medium text-gray-300 hover:text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-question text-cyan-400"></i>
+                        <span>Help</span>
+                    </a>
+                    <a href="https://t.me/hassan1updates" target="_blank" class="glass-button px-4 py-2 rounded-xl text-sm font-medium text-gray-300 hover:text-white flex items-center space-x-2">
+                        <i class="fa-brands fa-telegram text-blue-400"></i>
+                        <span>TG Channel</span>
+                    </a>
+
+                    <!-- ========================================================================= -->
+                    <!-- ⬇️ UPDATES LINK LOCATION #1 (HEADER) ⬇️ -->
+                    <!-- EDIT THE href="" ATTRIBUTE BELOW TO ADD YOUR CUSTOM UPDATES LINK -->
+                    <!-- ========================================================================= -->
+                    <a id="updates-link-header" href="#" target="_blank" class="px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-bolt text-yellow-300 animate-pulse"></i>
+                        <span>UPDATES</span>
+                    </a>
+                    <!-- ========================================================================= -->
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-toggle" class="md:hidden glass-button p-2.5 rounded-xl text-gray-300">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Drawer -->
+            <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-gray-800 px-4 pt-3 pb-6 space-y-3">
+                <a href="https://wa.me/923294675242" target="_blank" class="flex items-center space-x-3 p-3 rounded-xl bg-gray-900/60 text-gray-200">
+                    <i class="fa-solid fa-headset text-purple-400"></i>
+                    <span>Support (WhatsApp)</span>
+                </a>
+                <a href="https://wa.me/923294675242" target="_blank" class="flex items-center space-x-3 p-3 rounded-xl bg-gray-900/60 text-gray-200">
+                    <i class="fa-solid fa-circle-question text-cyan-400"></i>
+                    <span>Help Desk</span>
+                </a>
+                <a href="https://t.me/hassan1updates" target="_blank" class="flex items-center space-x-3 p-3 rounded-xl bg-gray-900/60 text-gray-200">
+                    <i class="fa-brands fa-telegram text-blue-400"></i>
+                    <span>Telegram Updates</span>
+                </a>
+
+                <!-- ========================================================================= -->
+                <!-- ⬇️ UPDATES LINK LOCATION #2 (MOBILE MENU) ⬇️ -->
+                <!-- EDIT THE href="" ATTRIBUTE BELOW TO ADD YOUR CUSTOM UPDATES LINK -->
+                <!-- ========================================================================= -->
+                <a id="updates-link-mobile" href="#" target="_blank" class="flex items-center justify-center space-x-2 p-3 rounded-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+                    <i class="fa-solid fa-bolt text-yellow-300"></i>
+                    <span>UPDATES CHANNEL</span>
+                </a>
+                <!-- ========================================================================= -->
+            </div>
+        </header>
+
+        <!-- APP CONTENT BODY -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+            <!-- Hero Intro Tag -->
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold mb-4 backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>100% Free Transparent WhatsApp Sticker Generator</span>
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
+                    Create <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Crazy Hybrid</span> Emojis
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Mix two emojis together, customize their scale & glow, and export directly as high-resolution transparent PNG stickers for WhatsApp, Telegram, or Discord!
+                </p>
+            </div>
+
+            <!-- MAIN EDITOR GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- LEFT PANEL: Emoji Selectors & Category Tabs (5 Columns) -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- SELECTOR CARD -->
+                    <div class="glass-panel rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-sliders text-brand-neon"></i>
+                                <span>Choose Base Emojis</span>
+                            </h3>
+                            <button id="btn-random" class="glass-button px-3 py-1.5 rounded-xl text-xs font-semibold text-cyan-300 hover:text-white flex items-center space-x-1.5">
+                                <i class="fa-solid fa-dice text-cyan-400"></i>
+                                <span>Surprise Me</span>
+                            </button>
+                        </div>
+
+                        <!-- Active Selection Preview Indicators -->
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <!-- Slot 1 -->
+                            <div id="slot-1-card" onclick="switchActiveSlot(1)" class="cursor-pointer border-2 border-purple-500 bg-purple-950/30 rounded-2xl p-4 text-center transition-all">
+                                <span class="text-xs uppercase font-mono tracking-wider text-purple-300 block mb-1">Base Layer (1)</span>
+                                <div id="slot-1-display" class="text-4xl my-1 animate-bounce">😀</div>
+                                <span id="slot-1-name" class="text-xs text-gray-400 font-medium block truncate">Grinning Face</span>
+                            </div>
+                            <!-- Slot 2 -->
+                            <div id="slot-2-card" onclick="switchActiveSlot(2)" class="cursor-pointer border-2 border-transparent bg-gray-900/60 rounded-2xl p-4 text-center transition-all hover:border-gray-700">
+                                <span class="text-xs uppercase font-mono tracking-wider text-gray-400 block mb-1">Overlay (2)</span>
+                                <div id="slot-2-display" class="text-4xl my-1">🔥</div>
+                                <span id="slot-2-name" class="text-xs text-gray-400 font-medium block truncate">Fire</span>
+                            </div>
+                        </div>
+
+                        <!-- Category Filter Tabs -->
+                        <div class="flex space-x-2 overflow-x-auto pb-2 mb-4 scrollbar-none" id="category-tabs">
+                            <!-- Injected by JS -->
+                        </div>
+
+                        <!-- Search Box -->
+                        <div class="relative mb-4">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+                            <input type="text" id="emoji-search" placeholder="Search emoji name..." class="w-full bg-gray-950/80 border border-gray-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-purple-500 transition-colors">
+                        </div>
+
+                        <!-- Emoji Grid Container -->
+                        <div id="emoji-grid" class="grid grid-cols-5 sm:grid-cols-6 gap-2 max-h-64 overflow-y-auto pr-1">
+                            <!-- Emojis Injected Here -->
+                        </div>
+                    </div>
+
+                    <!-- ADVANCED STICKER CONTROLS -->
+                    <div class="glass-panel rounded-3xl p-6 shadow-xl space-y-4">
+                        <h4 class="text-sm font-bold text-gray-200 flex items-center space-x-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-pink-400"></i>
+                            <span>Fine-Tune Sticker Effect</span>
+                        </h4>
+
+                        <div class="space-y-3">
+                            <!-- Overlay Scale -->
+                            <div>
+                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                    <span>Overlay Size Scale</span>
+                                    <span id="val-scale">75%</span>
+                                </div>
+                                <input type="range" id="input-scale" min="30" max="130" value="75" class="w-full accent-purple-500 cursor-pointer">
+                            </div>
+
+                            <!-- Overlay Rotation -->
+                            <div>
+                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                    <span>Overlay Rotation</span>
+                                    <span id="val-rotate">0°</span>
+                                </div>
+                                <input type="range" id="input-rotate" min="-180" max="180" value="0" class="w-full accent-cyan-500 cursor-pointer">
+                            </div>
+
+                            <!-- Neon Glow Power -->
+                            <div>
+                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                    <span>Aura Glow Intensity</span>
+                                    <span id="val-glow">20px</span>
+                                </div>
+                                <input type="range" id="input-glow" min="0" max="50" value="20" class="w-full accent-pink-500 cursor-pointer">
+                            </div>
+
+                            <!-- Blend Mode Selection -->
+                            <div>
+                                <label class="text-xs text-gray-400 block mb-1">Blend Mode Effect</label>
+                                <select id="select-blend" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-purple-500">
+                                    <option value="source-over">Normal Overlay</option>
+                                    <option value="multiply">Deep Shadow (Multiply)</option>
+                                    <option value="screen">Neon Glow (Screen)</option>
+                                    <option value="overlay">Vibrant Blend (Overlay)</option>
+                                    <option value="difference">Cyber Invert (Difference)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT PANEL: Live Canvas Preview & Export Hub (7 Columns) -->
+                <div class="lg:col-span-7 space-y-6">
+
+                    <!-- PREVIEW CANVAS CARD -->
+                    <div class="glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center">
+                        <div class="w-full flex items-center justify-between mb-6">
+                            <span class="text-xs font-mono text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+                                LIVE HD CANVAS PREVIEW
+                            </span>
+                            <div class="flex space-x-2">
+                                <button id="btn-reset" title="Reset All Settings" class="glass-button p-2 rounded-xl text-gray-400 hover:text-white text-xs">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                                <button id="btn-sound-toggle" title="Toggle Sound FX" class="glass-button p-2 rounded-xl text-yellow-400 hover:text-white text-xs">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Center Box -->
+                        <div class="relative group my-4">
+                            <!-- Background Grid Pattern for Transparency Check -->
+                            <div class="absolute inset-0 rounded-3xl bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+                            
+                            <!-- Glowing Frame -->
+                            <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-gray-950/70 border border-purple-500/30 flex items-center justify-center shadow-2xl shadow-purple-950/50 backdrop-blur-md overflow-hidden">
+                                <!-- Actual Hidden HTML5 Canvas for Export -->
+                                <canvas id="mashup-canvas" width="512" height="512" class="w-full h-full object-contain cursor-grab active:cursor-grabbing"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Live Action Buttons -->
+                        <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                            <!-- Download Button -->
+                            <button id="btn-download" class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-sm tracking-wide shadow-xl shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-[1.02] transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-download text-lg"></i>
+                                <span>DOWNLOAD PNG STICKER</span>
+                            </button>
+
+                            <!-- Copy / WhatsApp Direct Action -->
+                            <button id="btn-whatsapp-share" class="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm tracking-wide shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-[1.02] transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                                <span>SEND TO WHATSAPP</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- WHATSAPP STICKER GUIDE CARD -->
+                    <div class="glass-panel rounded-3xl p-6 shadow-xl border-l-4 border-l-emerald-500">
+                        <h4 class="text-base font-bold text-white flex items-center space-x-2 mb-3">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+                            <span>How to Send as WhatsApp Sticker?</span>
+                        </h4>
+                        <ol class="text-xs text-gray-300 space-y-2 list-decimal list-inside leading-relaxed">
+                            <li>Click <strong class="text-purple-300">"DOWNLOAD PNG STICKER"</strong> above to save the transparent image.</li>
+                            <li>Open any chat on WhatsApp, tap the <strong>Attachment (+)</strong> icon.</li>
+                            <li>Select <strong>Sticker</strong> option and choose your downloaded PNG image.</li>
+                            <li>WhatsApp will automatically convert your custom mashup into an interactive sticker! 🎉</li>
+                        </ol>
+                    </div>
+
+                    <!-- RECENT MASHUP HISTORY -->
+                    <div class="glass-panel rounded-3xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-sm font-bold text-gray-200 flex items-center space-x-2">
+                                <i class="fa-solid fa-clock-rotate-left text-cyan-400"></i>
+                                <span>Your Created Mashups</span>
+                            </h4>
+                            <button id="btn-clear-history" class="text-[11px] text-gray-500 hover:text-red-400">Clear All</button>
+                        </div>
+                        <div id="history-container" class="flex space-x-3 overflow-x-auto pb-2 scrollbar-none min-h-[70px] items-center">
+                            <!-- Injected History Thumbnails -->
+                            <span class="text-xs text-gray-500 italic">No mashups saved yet. Create one!</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER SECTION -->
+        <footer class="glass-panel border-t border-gray-800/80 mt-16 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">⚡</span>
+                    <div>
+                        <p class="text-xs font-bold text-gray-200">EmojiCraft Pro &copy; 2026</p>
+                        <p class="text-[10px] text-gray-400">Created with ultra-precision for content creators & chat lovers.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Quick Links -->
+                <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-gray-400">
+                    <a href="https://wa.me/923294675242" target="_blank" class="hover:text-purple-400 transition-colors">Support</a>
+                    <span class="text-gray-700">•</span>
+                    <a href="https://wa.me/923294675242" target="_blank" class="hover:text-cyan-400 transition-colors">Help</a>
+                    <span class="text-gray-700">•</span>
+                    <a href="https://t.me/hassan1updates" target="_blank" class="hover:text-blue-400 transition-colors">Telegram</a>
+                    <span class="text-gray-700">•</span>
+                    
+                    <!-- ========================================================================= -->
+                    <!-- ⬇️ UPDATES LINK LOCATION #3 (FOOTER) ⬇️ -->
+                    <!-- EDIT THE href="" ATTRIBUTE BELOW TO ADD YOUR CUSTOM UPDATES LINK -->
+                    <!-- ========================================================================= -->
+                    <a id="updates-link-footer" href="#" target="_blank" class="text-pink-400 font-bold hover:text-pink-300 transition-colors">UPDATES LINK</a>
+                    <!-- ========================================================================= -->
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- FLOATING WHATSAPP ACTION BUTTON -->
+    <a href="https://wa.me/923294675242" target="_blank" title="Contact Us on WhatsApp" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center text-3xl shadow-2xl shadow-emerald-500/50 hover:scale-110 transition-all duration-300 animate-pulse-glow">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- TOAST NOTIFICATION BOX -->
+    <div id="toast" class="fixed top-24 right-6 z-50 transform translate-x-72 opacity-0 transition-all duration-300 glass-panel border border-purple-500/40 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-2">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toast-message">Notification message here</span>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- JAVASCRIPT LOGIC & ENGINE ENGINE -->
+    <!-- ========================================================================= -->
+    <script>
+        // =========================================================================
+        // ⬇️ UPDATES LINK LOCATION #4 (JAVASCRIPT CONFIG) ⬇️
+        // CHANGE THE URL IN THE QUOTES BELOW WHEN YOU ARE READY TO ADD YOUR LINK:
+        // =========================================================================
+        const CUSTOM_UPDATES_URL = "https://whatsapp.com/channel/0029VbDuHz8JJhzb8zf92C1H"; 
+        // Example: const CUSTOM_UPDATES_URL = "https://whatsapp.com/channel/0029VbDuHz8JJhzb8zf92C1H";
+        // =========================================================================
+
+        // Apply URL to all placeholders automatically on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const headerLink = document.getElementById('updates-link-header');
+            const mobileLink = document.getElementById('updates-link-mobile');
+            const footerLink = document.getElementById('updates-link-footer');
+            
+            if (headerLink) headerLink.href = CUSTOM_UPDATES_URL;
+            if (mobileLink) mobileLink.href = CUSTOM_UPDATES_URL;
+            if (footerLink) footerLink.href = CUSTOM_UPDATES_URL;
+        });
+
+        // ----------------------------------------------------
+        // EMOJI DATABASE & CATEGORIES
+        // ----------------------------------------------------
+        const EMOJI_DATABASE = [
+            // Smileys
+            { symbol: "😀", name: "Grinning Face", cat: "smileys" },
+            { symbol: "😂", name: "Tears of Joy", cat: "smileys" },
+            { symbol: "😍", name: "Heart Eyes", cat: "smileys" },
+            { symbol: "😎", name: "Cool Sunglasses", cat: "smileys" },
+            { symbol: "🥳", name: "Party Face", cat: "smileys" },
+            { symbol: "😡", name: "Angry Face", cat: "smileys" },
+            { symbol: "🤯", name: "Exploding Head", cat: "smileys" },
+            { symbol: "😱", name: "Screaming Fear", cat: "smileys" },
+            { symbol: "😴", name: "Sleeping", cat: "smileys" },
+            { symbol: "🤡", name: "Clown", cat: "smileys" },
+            { symbol: "😈", name: "Smiling Devil", cat: "smileys" },
+            { symbol: "💩", name: "Pile of Poop", cat: "smileys" },
+
+            // Animals & Nature
+            { symbol: "🐶", name: "Dog Face", cat: "animals" },
+            { symbol: "🐱", name: "Cat Face", cat: "animals" },
+            { symbol: "🦁", name: "Lion", cat: "animals" },
+            { symbol: "🦄", name: "Unicorn", cat: "animals" },
+            { symbol: "🐲", name: "Dragon", cat: "animals" },
+            { symbol: "🐵", name: "Monkey", cat: "animals" },
+            { symbol: "🐼", name: "Panda", cat: "animals" },
+            { symbol: "🐍", name: "Snake", cat: "animals" },
+            { symbol: "🦅", name: "Eagle", cat: "animals" },
+            { symbol: "TG", name: "Tiger", cat: "animals" },
+
+            // Objects & Elements
+            { symbol: "🔥", name: "Fire Flame", cat: "elements" },
+            { symbol: "⚡", name: "Lightning", cat: "elements" },
+            { symbol: "💀", name: "Skull", cat: "elements" },
+            { symbol: "👑", name: "Crown", cat: "elements" },
+            { symbol: "💎", name: "Diamond", cat: "elements" },
+            { symbol: "🚀", name: "Rocket", cat: "elements" },
+            { symbol: "❤️", name: "Red Heart", cat: "elements" },
+            { symbol: "🌈", name: "Rainbow", cat: "elements" },
+            { symbol: "✨", name: "Sparkles", cat: "elements" },
+            { symbol: "💣", name: "Bomb", cat: "elements" },
+
+            // Gaming & Fantasy
+            { symbol: "👾", name: "Alien Monster", cat: "gaming" },
+            { symbol: "🎮", name: "Video Game Controller", cat: "gaming" },
+            { symbol: "🤖", name: "Robot", cat: "gaming" },
+            { symbol: "👻", name: "Ghost", cat: "gaming" },
+            { symbol: "⚔️", name: "Crossed Swords", cat: "gaming" },
+            { symbol: "🎯", name: "Bullseye", cat: "gaming" }
+        ];
+
+        const CATEGORIES = [
+            { id: "all", label: "All Emojis" },
+            { id: "smileys", label: "Smileys" },
+            { id: "animals", label: "Animals" },
+            { id: "elements", label: "Elements" },
+            { id: "gaming", label: "Gaming" }
+        ];
+
+        // ----------------------------------------------------
+        // STATE MANAGEMENT
+        // ----------------------------------------------------
+        let state = {
+            activeSlot: 1, // 1 or 2
+            slot1Emoji: EMOJI_DATABASE[0],
+            slot2Emoji: EMOJI_DATABASE[12], // Fire
+            overlayScale: 75,
+            overlayRotate: 0,
+            auraGlow: 20,
+            blendMode: "source-over",
+            soundEnabled: true,
+            activeCategory: "all",
+            searchQuery: "",
+            history: []
+        };
+
+        // ----------------------------------------------------
+        // AUDIO SYNTHESIZER (No external sound files required)
+        // ----------------------------------------------------
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSoundEffect(type) {
+            if (!state.soundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                } else if (type === 'random') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.15);
+                } else if (type === 'download') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
+                    osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16); // G5
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }
+            } catch (e) {
+                console.log("Audio play blocked");
+            }
+        }
+
+        // ----------------------------------------------------
+        // INITIALIZATION & UI RENDERING
+        // ----------------------------------------------------
+        const canvas = document.getElementById('mashup-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function initApp() {
+            renderCategoryTabs();
+            renderEmojiGrid();
+            setupEventListeners();
+            drawCanvas();
+            loadHistory();
+        }
+
+        function renderCategoryTabs() {
+            const container = document.getElementById('category-tabs');
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button onclick="setCategory('${cat.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${state.activeCategory === cat.id ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' : 'glass-button text-gray-400 hover:text-gray-200'}">
+                    ${cat.label}
+                </button>
+            `).join('');
+        }
+
+        function setCategory(catId) {
+            state.activeCategory = catId;
+            renderCategoryTabs();
+            renderEmojiGrid();
+            playSoundEffect('click');
+        }
+
+        function renderEmojiGrid() {
+            const grid = document.getElementById('emoji-grid');
+            const filtered = EMOJI_DATABASE.filter(item => {
+                const matchesCat = state.activeCategory === 'all' || item.cat === state.activeCategory;
+                const matchesSearch = item.name.toLowerCase().includes(state.searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-5 text-center text-xs text-gray-500 py-6">No emojis found</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => `
+                <button onclick="selectEmoji('${item.symbol}')" class="glass-button h-12 rounded-xl text-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+                    ${item.symbol}
+                </button>
+            `).join('');
+        }
+
+        function switchActiveSlot(slot) {
+            state.activeSlot = slot;
+            const card1 = document.getElementById('slot-1-card');
+            const card2 = document.getElementById('slot-2-card');
+
+            if (slot === 1) {
+                card1.className = "cursor-pointer border-2 border-purple-500 bg-purple-950/30 rounded-2xl p-4 text-center transition-all";
+                card2.className = "cursor-pointer border-2 border-transparent bg-gray-900/60 rounded-2xl p-4 text-center transition-all hover:border-gray-700";
+            } else {
+                card2.className = "cursor-pointer border-2 border-cyan-500 bg-cyan-950/30 rounded-2xl p-4 text-center transition-all";
+                card1.className = "cursor-pointer border-2 border-transparent bg-gray-900/60 rounded-2xl p-4 text-center transition-all hover:border-gray-700";
+            }
+            playSoundEffect('click');
+        }
+
+        function selectEmoji(symbol) {
+            const obj = EMOJI_DATABASE.find(e => e.symbol === symbol) || { symbol: symbol, name: "Custom" };
+            if (state.activeSlot === 1) {
+                state.slot1Emoji = obj;
+                document.getElementById('slot-1-display').innerText = obj.symbol;
+                document.getElementById('slot-1-name').innerText = obj.name;
+            } else {
+                state.slot2Emoji = obj;
+                document.getElementById('slot-2-display').innerText = obj.symbol;
+                document.getElementById('slot-2-name').innerText = obj.name;
+            }
+            playSoundEffect('click');
+            drawCanvas();
+        }
+
+        // ----------------------------------------------------
+        // CANVAS RENDERING ENGINE (HIGH-RES MASHUP)
+        // ----------------------------------------------------
+        function drawCanvas() {
+            // Clear Canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Center points
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            // 1. Draw Aura Glow Effect
+            if (state.auraGlow > 0) {
+                ctx.save();
+                ctx.shadowColor = 'rgba(168, 85, 247, 0.8)';
+                ctx.shadowBlur = state.auraGlow * 1.5;
+                ctx.font = '260px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(state.slot1Emoji.symbol, cx, cy);
+                ctx.restore();
+            }
+
+            // 2. Draw Slot 1 (Base Layer)
+            ctx.save();
+            ctx.font = '260px "Segoe UI Emoji", "Apple Color Emoji", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(state.slot1Emoji.symbol, cx, cy);
+            ctx.restore();
+
+            // 3. Draw Slot 2 (Overlay Layer with Scale, Rotation, Blend)
+            ctx.save();
+            ctx.globalCompositeOperation = state.blendMode;
+            ctx.translate(cx, cy);
+            ctx.rotate((state.overlayRotate * Math.PI) / 180);
+
+            const overlayFontSize = 260 * (state.overlayScale / 100);
+            ctx.font = `${overlayFontSize}px "Segoe UI Emoji", "Apple Color Emoji", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            if (state.auraGlow > 0) {
+                ctx.shadowColor = 'rgba(6, 182, 212, 0.8)';
+                ctx.shadowBlur = state.auraGlow;
+            }
+
+            ctx.fillText(state.slot2Emoji.symbol, 0, 0);
+            ctx.restore();
+        }
+
+        // ----------------------------------------------------
+        // EVENT LISTENERS & CONTROLS
+        // ----------------------------------------------------
+        function setupEventListeners() {
+            // Sliders
+            document.getElementById('input-scale').addEventListener('input', (e) => {
+                state.overlayScale = e.target.value;
+                document.getElementById('val-scale').innerText = `${e.target.value}%`;
+                drawCanvas();
+            });
+
+            document.getElementById('input-rotate').addEventListener('input', (e) => {
+                state.overlayRotate = e.target.value;
+                document.getElementById('val-rotate').innerText = `${e.target.value}°`;
+                drawCanvas();
+            });
+
+            document.getElementById('input-glow').addEventListener('input', (e) => {
+                state.auraGlow = e.target.value;
+                document.getElementById('val-glow').innerText = `${e.target.value}px`;
+                drawCanvas();
+            });
+
+            document.getElementById('select-blend').addEventListener('change', (e) => {
+                state.blendMode = e.target.value;
+                drawCanvas();
+            });
+
+            // Search
+            document.getElementById('emoji-search').addEventListener('input', (e) => {
+                state.searchQuery = e.target.value;
+                renderEmojiGrid();
+            });
+
+            // Random Combo Button
+            document.getElementById('btn-random').addEventListener('click', () => {
+                const rand1 = EMOJI_DATABASE[Math.floor(Math.random() * EMOJI_DATABASE.length)];
+                const rand2 = EMOJI_DATABASE[Math.floor(Math.random() * EMOJI_DATABASE.length)];
+                state.slot1Emoji = rand1;
+                state.slot2Emoji = rand2;
+
+                document.getElementById('slot-1-display').innerText = rand1.symbol;
+                document.getElementById('slot-1-name').innerText = rand1.name;
+                document.getElementById('slot-2-display').innerText = rand2.symbol;
+                document.getElementById('slot-2-name').innerText = rand2.name;
+
+                playSoundEffect('random');
+                drawCanvas();
+                showToast("🔥 Random Combo Generated!");
+            });
+
+            // Reset Button
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                state.overlayScale = 75;
+                state.overlayRotate = 0;
+                state.auraGlow = 20;
+                state.blendMode = "source-over";
+
+                document.getElementById('input-scale').value = 75;
+                document.getElementById('val-scale').innerText = "75%";
+                document.getElementById('input-rotate').value = 0;
+                document.getElementById('val-rotate').innerText = "0°";
+                document.getElementById('input-glow').value = 20;
+                document.getElementById('val-glow').innerText = "20px";
+                document.getElementById('select-blend').value = "source-over";
+
+                drawCanvas();
+                showToast("Reset settings to default!");
+            });
+
+            // Sound Toggle
+            document.getElementById('btn-sound-toggle').addEventListener('click', () => {
+                state.soundEnabled = !state.soundEnabled;
+                const icon = document.getElementById('btn-sound-toggle').querySelector('i');
+                if (state.soundEnabled) {
+                    icon.className = "fa-solid fa-volume-high text-yellow-400";
+                    showToast("Sound Effects Enabled");
+                } else {
+                    icon.className = "fa-solid fa-volume-xmark text-gray-500";
+                    showToast("Sound Effects Muted");
+                }
+            });
+
+            // Mobile Menu Toggle
+            document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+
+            // Download PNG Button
+            document.getElementById('btn-download').addEventListener('click', downloadSticker);
+
+            // WhatsApp Direct Action Button
+            document.getElementById('btn-whatsapp-share').addEventListener('click', () => {
+                downloadSticker();
+                setTimeout(() => {
+                    window.open('https://wa.me/923294675242', '_blank');
+                }, 800);
+            });
+
+            // Clear History
+            document.getElementById('btn-clear-history').addEventListener('click', () => {
+                state.history = [];
+                localStorage.removeItem('emoji_craft_history');
+                loadHistory();
+                showToast("History cleared!");
+            });
+        }
+
+        // ----------------------------------------------------
+        // EXPORT & SAVE STICKER LOGIC
+        // ----------------------------------------------------
+        function downloadSticker() {
+            playSoundEffect('download');
+            
+            // Generate Data URL from Canvas
+            const imageURI = canvas.toDataURL("image/png");
+            
+            // Create Invisible Link to trigger download
+            const link = document.createElement('a');
+            link.download = `EmojiMashup_${state.slot1Emoji.symbol}_${state.slot2Emoji.symbol}_${Date.now()}.png`;
+            link.href = imageURI;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Add to Local Storage History
+            saveToHistory(imageURI);
+            showToast("✅ Transparent PNG Sticker Downloaded!");
+        }
+
+        function saveToHistory(dataUrl) {
+            const newItem = {
+                id: Date.now(),
+                url: dataUrl,
+                e1: state.slot1Emoji.symbol,
+                e2: state.slot2Emoji.symbol
+            };
+
+            state.history.unshift(newItem);
+            if (state.history.length > 8) state.history.pop();
+
+            localStorage.setItem('emoji_craft_history', JSON.stringify(state.history));
+            loadHistory();
+        }
+
+        function loadHistory() {
+            const saved = localStorage.getItem('emoji_craft_history');
+            if (saved) {
+                try {
+                    state.history = JSON.parse(saved);
+                } catch(e) {
+                    state.history = [];
+                }
+            }
+
+            const container = document.getElementById('history-container');
+            if (state.history.length === 0) {
+                container.innerHTML = `<span class="text-xs text-gray-500 italic">No mashups saved yet. Create one!</span>`;
+                return;
+            }
+
+            container.innerHTML = state.history.map(item => `
+                <div class="relative group flex-shrink-0 w-14 h-14 rounded-2xl bg-gray-950 border border-gray-800 p-1 flex items-center justify-center hover:border-purple-500 transition-all cursor-pointer" onclick="downloadHistoryItem('${item.url}')">
+                    <img src="${item.url}" class="w-full h-full object-contain" alt="Mashup">
+                    <div class="absolute inset-0 bg-black/60 rounded-2xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white text-xs">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function downloadHistoryItem(url) {
+            const link = document.createElement('a');
+            link.download = `Saved_EmojiMashup_${Date.now()}.png`;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("Downloaded saved sticker!");
+        }
+
+        // ----------------------------------------------------
+        // TOAST NOTIFICATIONS
+        // ----------------------------------------------------
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-x-72', 'opacity-0');
+            toast.classList.add('translate-x-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-0', 'opacity-100');
+                toast.classList.add('translate-x-72', 'opacity-0');
+            }, 3000);
+        }
+
+        // Start App
+        window.onload = () => {
+            initApp();
+        };
+    </script>
+</body>
+</html>
